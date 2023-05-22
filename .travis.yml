@@ -16,9 +16,6 @@ before_deploy:
   - mv springboot-travis-project.zip deploy/springboot-travis-project.zip
 deploy:
   - provider: s3
-    on:
-      branches:
-        - main
     access_key_id: AKIAXKXLQ6GIVZKGAF52
     secret_access_key: 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
     bucket: springboot-travis-build
@@ -27,6 +24,8 @@ deploy:
     acl: private
     local_dir: deploy
     wait-until-deployed: true
+    on:
+      branches: main
 notifications:
   email:
     recipients:
