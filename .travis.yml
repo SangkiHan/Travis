@@ -14,3 +14,19 @@ notifications:
   email:
     recipients:
       - tkdrl8908@naver.com
+
+before_deploy:
+  - zip -r springboot-travis-project
+  - mkdir -p deploy
+  - mv springboot-travis-project.zip deploy/springboot-travis-project.zip
+
+deploy:
+  - provider: s3
+    access_key_id: AKIAXKXLQ6GIVZKGAF52
+    secret_access_key: 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
+    bucket: springboot-travis-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
