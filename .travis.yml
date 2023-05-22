@@ -25,7 +25,7 @@ deploy:
     local_dir: deploy
     wait-until-deployed: true
     on:
-      branches: main
+      all_branches: true
 notifications:
   email:
     recipients:
