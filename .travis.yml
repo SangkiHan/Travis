@@ -11,9 +11,9 @@ cache:
     - $HOME/.gradle
 script: ./gradlew clean build
 before_deploy:
-  - zip -r springboot-travis-project
+  - zip -r springboot-webservice-project
   - mkdir -p deploy
-  - mv springboot-travis-project.zip deploy/springboot-travis-project.zip
+  - mv springboot-webservice-project.zip deploy/springboot-webservice-project.zip
 deploy:
   - provider: s3
     access_key_id: AKIAXKXLQ6GIVZKGAF52
