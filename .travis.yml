@@ -3,7 +3,7 @@ language: java
 jdk:
   - openjdk11
 branches:
-  only: 
+  only:
     - main
 cache:
   directories:
@@ -19,10 +19,10 @@ deploy:
     access_key_id: AKIAXKXLQ6GIVZKGAF52
     secret_access_key: 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
     bucket: springboot-travis-build
-    key : travis.zip
-    build_typ : zip
-    application : travis-project
-    deployment_group : travis-project-group
+    key: travis.zip
+    build_typ: zip
+    application: travis-project
+    deployment_group: travis-project-group
     region: ap-northeast-2
     skip_cleanup: true
     acl: private
@@ -30,7 +30,6 @@ deploy:
     wait-until-deployed: true
     on:
       all_branches: true
-
 notifications:
   email:
     recipients:
