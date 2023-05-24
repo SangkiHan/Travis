@@ -1,3 +1,4 @@
+## .travis.xml
 ``` yml
 ---
 language: java #언어
@@ -43,5 +44,16 @@ notifications:
   email:
     recipients:
       - tkdrl8908@naver.com #빌드 실패시 알림 보낼 메일
+```
+
+## appspec.yml
+``` yml
+---
+version: 0.0 #버전
+os: linux #OS
+files:
+  - source: /
+    destination: /home/ec2-user/app/travis/build #zip파일을 저장할 경로
+    overwrites: yes #덮어쓰기 허용
 
 ```
