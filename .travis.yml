@@ -16,8 +16,8 @@ before_deploy:
   - mv travis.zip deploy/travis.zip
 deploy:
   - provider: s3
-    access_key_id: AKIAXKXLQ6GIVZKGAF52
-    secret_access_key: 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
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     bucket: springboot-travis-build
     key: travis.zip
     build_typ: zip
