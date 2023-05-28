@@ -5,48 +5,48 @@ jdk:
 branches:
   only:
     - main
-permissions:
-  - object: /
-    pattern: "**"
-    owner: "ec2-user"
-    group: "ec2-user"
-hooks:
-  AfterInstall:
-    - location: execute-deploy.sh
-      timeout: 180
+# permissions:
+#   - object: /
+#     pattern: "**"
+#     owner: "ec2-user"
+#     group: "ec2-user"
+# hooks:
+#   AfterInstall:
+#     - location: execute-deploy.sh
+#       timeout: 180
 cache:
   directories:
     - $HOME/.m2/repository
     - $HOME/.gradle
 script: ./gradlew clean build
-before_deploy:
-  - zip -r travis *
-  - mkdir -p deploy
-  - mv travis.zip deploy/travis.zip
-deploy:
-  - provider: s3 
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: springboot-travis-build
-    region: ap-northeast-2
-    skip_cleanup: true
-    acl: private
-    local_dir: deploy
-    wait-until-deployed: true
-    on:
-      all_branches: true
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY 
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: springboot-travis-build
-    key: travis.zip
-    bundle_type: zip
-    application: travis
-    deployment_group: travis-group
-    region: ap-northeast-2
-    wait-until-deployed: true
-    on:
-      all_branches: true
+# before_deploy:
+#   - zip -r travis *
+#   - mkdir -p deploy
+#   - mv travis.zip deploy/travis.zip
+# deploy:
+#   - provider: s3 
+#     access_key_id: $AWS_ACCESS_KEY
+#     secret_access_key: $AWS_SECRET_KEY
+#     bucket: springboot-travis-build
+#     region: ap-northeast-2
+#     skip_cleanup: true
+#     acl: private
+#     local_dir: deploy
+#     wait-until-deployed: true
+#     on:
+#       all_branches: true
+#   - provider: codedeploy
+#     access_key_id: $AWS_ACCESS_KEY 
+#     secret_access_key: $AWS_SECRET_KEY
+#     bucket: springboot-travis-build
+#     key: travis.zip
+#     bundle_type: zip
+#     application: travis
+#     deployment_group: travis-group
+#     region: ap-northeast-2
+#     wait-until-deployed: true
+#     on:
+#       all_branches: true
 notifications:
   email:
     recipients:
