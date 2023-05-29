@@ -35,18 +35,18 @@ deploy:
     wait-until-deployed: true
     on:
       all_branches: true
-#   - provider: codedeploy
-#     access_key_id: $AWS_ACCESS_KEY 
-#     secret_access_key: $AWS_SECRET_KEY
-#     bucket: springboot-travis-build
-#     key: travis.zip
-#     bundle_type: zip
-#     application: travis
-#     deployment_group: travis-group
-#     region: ap-northeast-2
-#     wait-until-deployed: true
-#     on:
-#       all_branches: true
+  - provider: codedeploy
+      access_key_id: $AWS_ACCESS_KEY 
+      secret_access_key: $AWS_SECRET_KEY
+      bucket: traivs-bucket 
+      key: travis.zip
+      bundle_type: zip
+      application: travis-project
+      deployment_group: travis-group
+      region: ap-northeast-2
+      wait-until-deployed: true
+      on:
+      all_branches: true
 notifications:
   email:
     recipients:
