@@ -1,19 +1,9 @@
---- 
 language: java
 jdk:
   - openjdk11
 branches:
   only:
     - main
-# permissions:
-#   - object: /
-#     pattern: "**"
-#     owner: "ec2-user"
-#     group: "ec2-user"
-# hooks:
-#   AfterInstall:
-#     - location: execute-deploy.sh
-#       timeout: 180
 cache:
   directories:
     - $HOME/.m2/repository
@@ -24,7 +14,7 @@ before_deploy:
   - mkdir -p deploy
   - mv travis.zip deploy/travis.zip
 deploy:
-  - provider: s3 
+  - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: traivs-bucket
@@ -33,19 +23,19 @@ deploy:
     acl: private
     local_dir: deploy
     wait-until-deployed: true
-    on:
+    'on':
       all_branches: true
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY 
+    access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: traivs-bucket 
+    bucket: traivs-bucket
     key: travis.zip
     bundle_type: zip
     application: travis-project
     deployment_group: travis-group
     region: ap-northeast-2
     wait-until-deployed: true
-    on:
+    'on': null
     all_branches: true
 notifications:
   email:
